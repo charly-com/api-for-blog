@@ -1,6 +1,14 @@
-import mongoose from "mongoose";
+import mongoose, {Schema} from "mongoose";
 
-const PostSchema = new mongoose.Schema({
+interface postInstance {
+    title: string;
+    desc: string;
+    photo: string;
+    username: string;
+    categories: string[];
+}
+
+const PostSchema = new Schema({
     title: {
         type: String,
         required: true,
@@ -26,4 +34,6 @@ const PostSchema = new mongoose.Schema({
     timestamps: true,
 })
 
-module.exports = mongoose.model('Post', PostSchema);
+const Post = mongoose.model<postInstance>('Post', PostSchema);
+
+export default Post;

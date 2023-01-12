@@ -2,6 +2,7 @@ import express, {Request, Response} from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import authRoute from './routes/auth';
+import authUser from './routes/user';
 dotenv.config();
 
 const app = express();
@@ -17,6 +18,7 @@ mongoose.connect(process.env.CONNECT_URL!, <MongoDBOptions>{
 .catch((error: Error) => console.log(error.message));
 
 app.use("/auth", authRoute)
+app.use("/users", authUser)
 
 app.listen(5000, () => {
     console.log('Server running on port 5000');
