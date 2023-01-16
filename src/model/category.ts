@@ -1,6 +1,10 @@
-import mongoose from "mongoose";
+import mongoose, {Schema} from "mongoose";
 
-const CategorySchema = new mongoose.Schema({
+interface categoryInstance {
+    name: string;
+}
+
+const CategorySchema = new Schema({
 
     name: {
         type: String,
@@ -8,4 +12,7 @@ const CategorySchema = new mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model('Category', CategorySchema);
+
+const Category = mongoose.model<categoryInstance>('Category', CategorySchema);
+
+export default Category;

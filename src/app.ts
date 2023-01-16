@@ -1,13 +1,17 @@
 import express, {Request, Response} from 'express';
+import logger from 'morgan';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import authRoute from './routes/auth';
 import authUser from './routes/user';
+import authPost from './routes/post';
+import authCategory from './routes/categories';
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
+app.use(logger('dev'));
   
 mongoose.set('strictQuery', false);
 mongoose.connect(process.env.CONNECT_URL!, <MongoDBOptions>{
@@ -19,6 +23,8 @@ mongoose.connect(process.env.CONNECT_URL!, <MongoDBOptions>{
 
 app.use("/auth", authRoute)
 app.use("/users", authUser)
+app.use("/posts", authPost)
+app.use("/category", authCategory)
 
 app.listen(5000, () => {
     console.log('Server running on port 5000');
