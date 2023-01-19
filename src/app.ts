@@ -6,12 +6,14 @@ import authRoute from './routes/auth';
 import authUser from './routes/user';
 import authPost from './routes/post';
 import authCategory from './routes/categories';
+import path from 'path';
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
 app.use(logger('dev'));
+// app.use("/images", express.static(path.join(__dirname, "/images")))
   
 mongoose.set('strictQuery', false);
 mongoose.connect(process.env.CONNECT_URL!, <MongoDBOptions>{
